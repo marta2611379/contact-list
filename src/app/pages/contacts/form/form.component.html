@@ -1,1 +1,21 @@
-<p>form works!</p>
+<form [formGroup]="form" (submit)="onSubmit($event)">
+  <input type="text" formControlName="firstname" placeholder="Firstname" />
+  <input type="text" formControlName="lastname" placeholder="Lastname" />
+  <input type="text" formControlName="surname" placeholder="Surname" />
+  <select
+    name="gender"
+    id="gender"
+    formControlName="gender"
+    placeholder="Gender"
+  >
+    <option value="" disabled selected>Gender</option>
+    @for(item of GenderEnum | keyvalue; track $index) {
+    <option [value]="item.key">{{ item.value }}</option>
+    }
+  </select>
+  <input type="email" formControlName="email" placeholder="Email" />
+  <input type="text" formControlName="phone" placeholder="Phone" />
+  <input type="date" formControlName="birthdate" placeholder="Birth date" />
+  <input type="text" formControlName="address" placeholder="Address" />
+  <button type="submit">Save</button>
+</form>

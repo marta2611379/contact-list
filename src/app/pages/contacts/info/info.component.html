@@ -1,1 +1,7 @@
-<p>info works!</p>
+@if(contact){
+<p>{{ contact.firstname }} {{contact.surname}} {{ contact.lastname }}</p>
+<p>{{ contact.email }}</p>
+<p>{{ contact.phone }}</p>
+<p>{{ contact.birthdate }}</p>
+<p>{{ contact.address }}</p>
+}

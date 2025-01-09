@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const contactRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'create',
+    redirectTo: 'list',
     pathMatch: 'full',
   },
   {

@@ -1,1 +1,17 @@
-<p>list works!</p>
+<button (click)="create()">Create</button>
+<button (click)="init()">Init</button>
+<br />
+<input (input)="onSearch($event)" placeholder="Search" />
+<br />
+@for(contact of filteredContacts; track $index) {
+<p>
+  {{ contact.firstname }} {{ contact.surname || "" }} {{ contact.lastname }}
+</p>
+<p>{{ contact.email }}</p>
+<p>{{ contact.phone }}</p>
+<p>{{ contact.birthdate }}</p>
+<p>{{ contact.address }}</p>
+<button (click)="edit(contact.id)">Edit</button>
+<button (click)="remove(contact.id)">Delete</button>
+<button (click)="info(contact.id)">Info</button>
+}
