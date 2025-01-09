@@ -1,12 +1,16 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { IContact } from '../interfaces/contact.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private toastr: ToastrService
+  ) {}
 
   public get(): IContact[] {
     if (isPlatformBrowser(this.platformId)) {
@@ -119,5 +123,7 @@ export class ContactsService {
     ];
 
     localStorage.setItem('contacts', JSON.stringify(contacts));
+
+	 this.toastr.success('Success message', 'Success');
   }
 }
