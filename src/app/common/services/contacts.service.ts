@@ -15,10 +15,10 @@ export class ContactsService {
   public get(): IContact[] {
     if (isPlatformBrowser(this.platformId)) {
       let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-      contacts = contacts.map((contact: IContact) => {
-        contact.birthdate = this.formatDate(contact.birthdate);
-        return contact;
-      });
+      // contacts = contacts.map((contact: IContact) => {
+      //   contact.birthdate = this.formatDate(contact.birthdate);
+      //   return contact;
+      // });
       return contacts;
     }
     return [];
@@ -34,6 +34,7 @@ export class ContactsService {
     let index = contacts.findIndex((c) => c.id === id);
     contacts.splice(index, 1);
     localStorage.setItem('contacts', JSON.stringify(contacts));
+    this.toastr.success('Контакт видалено', 'Успішно');
   }
 
   public save(value: IContact): void {
@@ -43,6 +44,7 @@ export class ContactsService {
     });
     contacts.push(contact);
     localStorage.setItem('contacts', JSON.stringify(contacts));
+    this.toastr.success('Контакт збережено', 'Успішно');
   }
 
   public update(id: string, value: IContact): void {
@@ -53,10 +55,12 @@ export class ContactsService {
     let index = contacts.findIndex((c) => c.id === id);
     contacts.splice(index, 1, contact);
     localStorage.setItem('contacts', JSON.stringify(contacts));
+    this.toastr.success('Контакт оновлено', 'Успішно');
   }
 
   public clear(): void {
     localStorage.removeItem('contacts');
+    //  this.toastr.success('Список очищено', 'Успішно');
   }
 
   public search(query: string): IContact[] {
@@ -84,6 +88,7 @@ export class ContactsService {
         id: new Date('2024-12-31T15:30:00').getTime().toString(),
         firstname: 'Марта',
         lastname: 'Марцінків',
+        gender: 'female',
         email: 'marta2611379@gmail.com',
         phone: '+380934975099',
         birthdate: '1998-11-26',
@@ -94,6 +99,7 @@ export class ContactsService {
         firstname: 'Тарас',
         lastname: 'Шевченко',
         surname: 'Григорович',
+        gender: 'male',
         email: 'kobzar@gmail.com',
         phone: '+380934343444',
         birthdate: '1814-03-09',
@@ -104,9 +110,11 @@ export class ContactsService {
         firstname: 'Степан',
         lastname: 'Бандера',
         surname: 'Андрійович',
+        gender: 'male',
         email: 'nationalist@gmail.com',
         phone: '+380934343443',
         birthdate: '1909-01-01',
+
         address:
           'с. Старий Угринів, Калуський район, Івано-Франківська область',
       },
@@ -115,15 +123,16 @@ export class ContactsService {
         id: new Date('2024-12-31T15:33:00').getTime().toString(),
         firstname: 'Євген',
         lastname: 'Коновалець',
+        gender: 'male',
         email: 'konovalets_oun@gmail.com',
         phone: '+380934343442',
-        birthdate: '1909-01-01',
+        birthdate: '1891-06-14',
         address: 'с. Зашків, Стрийський район, Львівська область',
       },
     ];
 
     localStorage.setItem('contacts', JSON.stringify(contacts));
 
-	 this.toastr.success('Success message', 'Success');
+    this.toastr.success('Список наповнено даними', 'Успішно');
   }
 }

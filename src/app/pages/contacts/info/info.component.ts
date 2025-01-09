@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IContact } from '../../../common/interfaces/contact.interface';
 import { ContactsService } from '../../../common/services/contacts.service';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,7 @@ export class InfoComponent {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly contactService: ContactsService
   ) {
     this.id = atob(this.route.snapshot.paramMap.get('id') || '');
@@ -23,5 +24,9 @@ export class InfoComponent {
 
   ngOnInit(): void {
     if (this.id) this.contact = this.contactService.getById(this.id);
+  }
+
+  public edit(id: string): void {
+    this.router.navigate(['/edit', btoa(id)]);
   }
 }

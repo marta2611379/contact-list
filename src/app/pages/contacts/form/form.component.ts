@@ -56,7 +56,7 @@ export class FormComponent {
     }
   }
 
-  public onSubmit(event: Event): void {
+  public onSubmit(): void {
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
