@@ -1,0 +1,87 @@
+@use "variables" as *;
+
+.contacts {
+	border-style: solid;
+	border-width: 0;
+	border-radius: 6px;
+	box-shadow:
+		0 4px 18px rgba($black, 0.2),
+		0 0 transparent,
+		0 0 transparent;
+
+	.actions {
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		padding: 20px;
+		&__block-1 {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		&__block-2 {
+			display: flex;
+			align-items: center;
+		}
+		&__search {
+			width: 350px;
+		}
+		&__button {
+			width: fit-content;
+			min-width: 200px;
+			height: 45px;
+		}
+	}
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	&__header {
+		background-color: $bg;
+	}
+
+	&__row {
+		height: 50px !important;
+		background-color: $white;
+	}
+
+	&__cell {
+		border-bottom: thin solid rgba($black, 0.1);
+		padding: 6px 16px;
+		vertical-align: middle;
+		text-align: left;
+	}
+
+	&--actions {
+		text-align: left;
+	}
+}
+
+.table__row--header {
+	font-weight: bold;
+	.table__cell {
+		text-transform: uppercase;
+		height: 48px;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.0625rem;
+		text-transform: uppercase;
+		border-top: thin solid rgba($black, 0.1);
+		color: $black;
+	}
+}
+
+.table__row--body {
+	&:hover {
+		background-color: rgba($grey, 0.1) !important;
+		cursor: pointer;
+	}
+	.table__cell {
+		height: 56px;
+		border-bottom: thin solid rgba($black, 0.1);
+		font-size: 15px;
+		line-height: 20px;
+		white-space: pre-line;
+	}
+}

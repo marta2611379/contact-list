@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { IContact } from '../../../common/interfaces/contact.interface';
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../common/services/contacts.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ThreeDotsMenuComponent } from './three-dots-menu/three-dots-menu.component';
 
 @Component({
   selector: 'app-list',
-  imports: [CommonModule],
+  imports: [CommonModule, ThreeDotsMenuComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
-  private contacts: IContact[] = [];
   public filteredContacts: IContact[] = [];
   private searchSubject = new Subject<string>();
+  public activeMenu: number | null = null;
+
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this.activeMenu = null;
+  }
 
   constructor(
     private readonly router: Router,
@@ -22,9 +28,7 @@ export class ListComponent {
   ) {}
 
   ngOnInit(): void {
-    this.contacts = this.contactService.get();
-    this.filteredContacts = this.contacts;
-
+    this.filteredContacts = this.contactService.get();
     this.searchSubject
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((query) => {
@@ -33,17 +37,20 @@ export class ListComponent {
       });
   }
 
+  public onMenuOpened(menuId: number | null): void {
+    this.activeMenu = menuId;
+  }
+
   public init(): void {
     this.contactService.initContacts();
-    this.contacts = this.contactService.get();
-    this.filteredContacts = this.contacts;
+    this.filteredContacts = this.contactService.get();
     this.searchSubject.next('');
   }
 
   public remove(id: string): void {
     if (confirm('Are you sure you want to delete this contact?')) {
       this.contactService.remove(id);
-      this.contacts = this.contactService.get();
+      this.filteredContacts = this.contactService.get();
     } else {
       return;
     }

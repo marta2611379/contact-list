@@ -1,17 +1,67 @@
-<button (click)="create()">Create</button>
-<button (click)="init()">Init</button>
-<br />
-<input (input)="onSearch($event)" placeholder="Search" />
-<br />
-@for(contact of filteredContacts; track $index) {
-<p>
-  {{ contact.firstname }} {{ contact.surname || "" }} {{ contact.lastname }}
-</p>
-<p>{{ contact.email }}</p>
-<p>{{ contact.phone }}</p>
-<p>{{ contact.birthdate }}</p>
-<p>{{ contact.address }}</p>
-<button (click)="edit(contact.id)">Edit</button>
-<button (click)="remove(contact.id)">Delete</button>
-<button (click)="info(contact.id)">Info</button>
-}
+<div class="contacts">
+  <div class="actions">
+    <div class="actions__block-1">
+      <button (click)="create()" class="actions__button button-primary">
+        Створити
+      </button>
+      <button (click)="init()" class="actions__button button-outline">
+        Наповнити список
+      </button>
+    </div>
+    <div class="actions__block-2">
+      <div class="form__group">
+        <input
+          type="input"
+          (input)="onSearch($event)"
+          class="actions__search form__field"
+          name="search"
+          id="search"
+          placeholder=""
+        />
+        <label for="search" class="form__label">Пошук</label>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="table__header">
+      <tr class="table__row table__row--header">
+        <th class="table__cell table__cell--header">#</th>
+        <th class="table__cell table__cell--header">ПІБ</th>
+        <th class="table__cell table__cell--header">Пошта</th>
+        <th class="table__cell table__cell--header">Телефон</th>
+        <th class="table__cell table__cell--header">Дії</th>
+      </tr>
+    </thead>
+    <tbody class="table__body">
+      @for(contact of filteredContacts; track $index) {
+      <tr class="table__row table__row--body">
+        <td class="table__cell">{{ $index + 1 }}</td>
+        <td class="table__cell">
+          {{ contact.lastname }} {{ contact.firstname }}
+          {{ contact.surname || "" }}
+        </td>
+        <td class="table__cell">
+          <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+        </td>
+        <td class="table__cell">
+          <a [href]="'tel:' + contact.phone">{{ contact.phone }}</a>
+        </td>
+        <td class="table__cell table__cell--actions">
+          <app-three-dots-menu
+            [menuId]="$index"
+            [activeMenu]="activeMenu"
+            (menuOpened)="onMenuOpened($event)"
+            (edit)="edit(contact.id)"
+            (remove)="remove(contact.id)"
+            (info)="info(contact.id)"
+          ></app-three-dots-menu>
+        </td>
+      </tr>
+      } @empty {
+      <tr class="table__row table__row--body">
+        <td class="table__cell" colspan="12">Порожньо</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

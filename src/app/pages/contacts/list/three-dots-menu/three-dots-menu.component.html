@@ -1,0 +1,8 @@
+<div class="three-dots-menu" (click)="toggleMenu($event)">
+  <div class="menu-trigger">&vellip;</div>
+  <ul class="menu-items" [class.open]="isMenuOpen">
+    <li class="menu-item" (click)="edit.emit()">Редагувати</li>
+    <li class="menu-item" (click)="remove.emit()">Видалити</li>
+    <li class="menu-item" (click)="info.emit()">Детальніше</li>
+  </ul>
+</div>

@@ -31,6 +31,9 @@
             ],
             "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/styles"]
+            },
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
