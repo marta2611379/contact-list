@@ -1,18 +1,10 @@
 @use "variables" as *;
 
 .contacts {
-	border-style: solid;
-	border-width: 0;
-	border-radius: 6px;
-	box-shadow:
-		0 4px 18px rgba($black, 0.2),
-		0 0 transparent,
-		0 0 transparent;
-
 	.actions {
 		display: flex;
 		justify-content: space-between;
-		gap: 20px;
+		gap: 100px;
 		padding: 20px;
 		&__block-1 {
 			display: flex;

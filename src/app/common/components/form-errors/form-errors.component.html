@@ -1,0 +1,12 @@
+@if(control.invalid && (control.dirty || control.touched)) {
+<div class="error-message">
+  <p>
+    @if(control.errors?.['required']){ Заповніть поле }@else if
+    (control.errors?.['invalidEmail']){ Введіть коректну пошту }@else if
+    (control.errors?.['invalidPhone']){ Введіть телефон у форматі +380 }@else if
+    (control.errors?.['invalidBirthDate']){ Введіть коректну дату }@else if
+    (control.errors?.['minlength']){ Значення надто коротке. Мінімальна
+    кількость символів {{control.errors?.['minlength']?.['requiredLength']}} }
+  </p>
+</div>
+}

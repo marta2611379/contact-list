@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IContact } from '../../../common/interfaces/contact.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../../../common/services/contacts.service';
 import { GenderEnum } from '../../../common/enums/gender.enum';
 import { CommonModule } from '@angular/common';
+import { emailValidator } from '../../../common/validators/email.validator';
+import { FormErrorsComponent } from '../../../common/components/form-errors/form-errors.component';
+import { phoneValidator } from '../../../common/validators/phone.validator';
+import { birthDateValidator } from '../../../common/validators/birthdate.validator';
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormErrorsComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
 })
@@ -38,12 +42,12 @@ export class FormComponent {
 
   private contactFormInit(): FormGroup {
     return this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      surname: [''],
-      email: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      birthdate: ['', [Validators.required]],
+      firstname: ['', [Validators.required, Validators.minLength(2)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      surname: ['', [Validators.minLength(2)]],
+      email: ['', [Validators.required, emailValidator]],
+      phone: ['', [Validators.required, phoneValidator]],
+      birthdate: ['', [Validators.required, birthDateValidator]],
       address: ['', [Validators.required]],
       gender: ['', [Validators.required]],
     });
@@ -68,5 +72,37 @@ export class FormComponent {
 
     this.router.navigate(['/list']);
     this.form.reset();
+  }
+
+  public get firstname(): FormControl {
+    return this.form.get('firstname') as FormControl;
+  }
+
+  public get lastname(): FormControl {
+    return this.form.get('lastname') as FormControl;
+  }
+
+  public get surname(): FormControl {
+    return this.form.get('surname') as FormControl;
+  }
+
+  public get phone(): FormControl {
+    return this.form.get('phone') as FormControl;
+  }
+
+  public get birthdate(): FormControl {
+    return this.form.get('birthdate') as FormControl;
+  }
+
+  public get address(): FormControl {
+    return this.form.get('address') as FormControl;
+  }
+
+  public get gender(): FormControl {
+    return this.form.get('gender') as FormControl;
+  }
+
+  public get email(): FormControl {
+    return this.form.get('email') as FormControl;
   }
 }

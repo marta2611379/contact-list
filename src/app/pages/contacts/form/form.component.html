@@ -1,21 +1,120 @@
-<form [formGroup]="form" (submit)="onSubmit()">
-  <input type="text" formControlName="firstname" placeholder="Firstname" />
-  <input type="text" formControlName="lastname" placeholder="Lastname" />
-  <input type="text" formControlName="surname" placeholder="Surname" />
-  <select
-    name="gender"
-    id="gender"
-    formControlName="gender"
-    placeholder="Gender"
-  >
-    <option value="" disabled selected>Gender</option>
-    @for(item of GenderEnum | keyvalue; track $index) {
-    <option [value]="item.key">{{ item.value }}</option>
-    }
-  </select>
-  <input type="email" formControlName="email" placeholder="Email" />
-  <input type="text" formControlName="phone" placeholder="Phone" />
-  <input type="date" formControlName="birthdate" placeholder="Birth date" />
-  <input type="text" formControlName="address" placeholder="Address" />
-  <button type="submit">Save</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form shadows">
+  <div class="form__group">
+    <input
+      type="text"
+      class="form__field"
+      id="firstname"
+      placeholder=""
+      formControlName="firstname"
+      [ngClass]="{
+        error: firstname.invalid && (firstname.dirty || firstname.touched)
+      }"
+    />
+    <label for="firstname" class="form__label">Ім&apos;я</label>
+    <app-form-errors [control]="email"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="text"
+      class="form__field"
+      id="lastname"
+      placeholder=""
+      formControlName="lastname"
+      [ngClass]="{
+        error: lastname.invalid && (lastname.dirty || lastname.touched)
+      }"
+    />
+    <label for="lastname" class="form__label">Прізвище</label>
+    <app-form-errors [control]="lastname"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="text"
+      class="form__field"
+      id="surname"
+      placeholder=""
+      formControlName="surname"
+      [ngClass]="{
+        error: surname.invalid && (surname.dirty || surname.touched)
+      }"
+    />
+    <label for="surname" class="form__label">По батькові</label>
+    <app-form-errors [control]="surname"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <select
+      class="form__field"
+      id="gender"
+      formControlName="gender"
+      [ngClass]="{ error: gender.invalid && (gender.dirty || gender.touched) }"
+    >
+      <option value="" disabled selected hidden>Оберіть стать</option>
+      @for(item of GenderEnum | keyvalue; track $index){
+      <option [value]="item.key">{{ item.value }}</option>
+      }
+    </select>
+    <label for="gender" class="form__label">Стать</label>
+    <app-form-errors [control]="gender"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="email"
+      class="form__field"
+      id="email"
+      placeholder=""
+      formControlName="email"
+      [ngClass]="{ error: email.invalid && (email.dirty || email.touched) }"
+    />
+    <label for="email" class="form__label">Пошта</label>
+    <app-form-errors [control]="email"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="tel"
+      class="form__field"
+      id="phone"
+      placeholder=""
+      formControlName="phone"
+      [ngClass]="{ error: phone.invalid && (phone.dirty || phone.touched) }"
+    />
+    <label for="phone" class="form__label">Телефон</label>
+    <app-form-errors [control]="phone"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="date"
+      class="form__field"
+      id="birthdate"
+      placeholder=""
+      formControlName="birthdate"
+      [ngClass]="{
+        error: birthdate.invalid && (birthdate.dirty || birthdate.touched)
+      }"
+    />
+    <label for="birthdate" class="form__label">Дата народження</label>
+    <app-form-errors [control]="birthdate"></app-form-errors>
+  </div>
+
+  <div class="form__group">
+    <input
+      type="text"
+      class="form__field"
+      id="address"
+      placeholder=""
+      formControlName="address"
+      [ngClass]="{
+        error: address.invalid && (address.dirty || address.touched)
+      }"
+    />
+    <label for="address" class="form__label">Адреса</label>
+    <app-form-errors [control]="address"></app-form-errors>
+  </div>
+
+  <button type="submit" class="form__button button-primary">Зберегти</button>
 </form>

@@ -2,12 +2,13 @@
 
 .form__group {
 	position: relative;
+
 	.form__field {
 		width: 100%;
-		height: 35px;
+		height: 50px;
 		border: 0;
 		border-bottom: 2px solid $grey;
-		padding: 10px 0;
+		padding: 20px 0 5px 0;
 		font-size: 1.2rem;
 		background: transparent;
 		outline: none;
@@ -18,8 +19,18 @@
 			color: transparent;
 		}
 
+		&.error {
+			border-color: $red;
+			&:placeholder-shown ~ .form__label {
+				color: $red;
+			}
+			&:focus ~ .form__label {
+				color: $black;
+			}
+		}
+
 		&:placeholder-shown ~ .form__label {
-			top: 20px;
+			top: 15px;
 			font-size: 1.2rem;
 			color: $grey;
 		}
@@ -29,7 +40,7 @@
 		}
 
 		&:focus ~ .form__label {
-			top: -5px;
+			top: 0;
 			font-size: 1rem;
 			color: $black;
 		}
@@ -37,10 +48,17 @@
 
 	.form__label {
 		position: absolute;
-		top: -5px;
+		top: 0;
 		left: 0;
 		font-size: 1rem;
 		color: $grey;
 		transition: all 0.2s;
+	}
+
+	.error-message {
+		color: $red;
+		font-size: 0.8rem;
+		margin-top: 5px;
+		max-width: 200px;
 	}
 }

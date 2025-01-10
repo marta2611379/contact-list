@@ -1,8 +1,22 @@
 @if(contact){
-<p>{{ contact.firstname }} {{ contact.surname }} {{ contact.lastname }}</p>
-<p>{{ contact.email }}</p>
-<p>{{ contact.phone }}</p>
-<p>{{ contact.birthdate }}</p>
-<p>{{ contact.address }}</p>
-<button (click)="edit(contact.id)">Edit</button>
+<div class="contact-card shadows">
+  <div class="contact-card__header">
+    <h3>
+      {{ contact.firstname }} {{ contact.surname }} {{ contact.lastname }}
+    </h3>
+    <button class="edit-button button-outline" (click)="edit(contact.id)">
+      Редагувати
+    </button>
+  </div>
+  <div class="contact-card__body">
+    <p><strong>Стать:</strong> {{ contact.gender | enum : GenderEnum }}</p>
+    <p><strong>Пошта:</strong> {{ contact.email }}</p>
+    <p><strong>Телефон:</strong> {{ contact.phone }}</p>
+    <p>
+      <strong>Дата народження:</strong>
+      {{ contact.birthdate | date : "dd-MM-yyyy" }}
+    </p>
+    <p><strong>Адреса:</strong> {{ contact.address }}</p>
+  </div>
+</div>
 }

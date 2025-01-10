@@ -15,10 +15,6 @@ export class ContactsService {
   public get(): IContact[] {
     if (isPlatformBrowser(this.platformId)) {
       let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-      // contacts = contacts.map((contact: IContact) => {
-      //   contact.birthdate = this.formatDate(contact.birthdate);
-      //   return contact;
-      // });
       return contacts;
     }
     return [];
@@ -60,7 +56,6 @@ export class ContactsService {
 
   public clear(): void {
     localStorage.removeItem('contacts');
-    //  this.toastr.success('Список очищено', 'Успішно');
   }
 
   public search(query: string): IContact[] {
@@ -132,7 +127,6 @@ export class ContactsService {
     ];
 
     localStorage.setItem('contacts', JSON.stringify(contacts));
-
     this.toastr.success('Список наповнено даними', 'Успішно');
   }
 }

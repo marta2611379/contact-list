@@ -33,7 +33,6 @@ export class ListComponent {
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((query) => {
         this.filteredContacts = this.contactService.search(query);
-        console.log(this.filteredContacts);
       });
   }
 
@@ -48,7 +47,7 @@ export class ListComponent {
   }
 
   public remove(id: string): void {
-    if (confirm('Are you sure you want to delete this contact?')) {
+    if (confirm('Ви дійсно бажаєте видалити контакт?')) {
       this.contactService.remove(id);
       this.filteredContacts = this.contactService.get();
     } else {
