@@ -21,12 +21,6 @@
 
 		&.error {
 			border-color: $red;
-			&:placeholder-shown ~ .form__label {
-				color: $red;
-			}
-			&:focus ~ .form__label {
-				color: $black;
-			}
 		}
 
 		&:placeholder-shown ~ .form__label {
